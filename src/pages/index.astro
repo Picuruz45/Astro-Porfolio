@@ -1,0 +1,58 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SocialPill from "../components/SocialPill.astro"
+import Badge from "../components/Badge.astro"
+import Experience from "../components/Experience.astro"
+import obtenerRepositorios from "../../public/JavaScript/conectarGitHub.js"
+
+import LinkedIn from "../components/icons/LinkedIn.astro"
+import GitHubIcon from "../components/icons/GitHub.astro"
+import EmailIcon from "../components/icons/Email.astro"
+import Work from "../components/icons/Work.astro"
+import TargetProyecto from "../components/TargetProyecto.astro"
+import NavProyectos from "../components/NavProyectos.astro"
+
+obtenerRepositorios()
+---
+
+<Layout title="Porfolio de Marcos Guerrero - Desarrollador y Programador Web">
+	<main class="flex flex-col items-center gap-y-8">
+		
+		<section id="info" class=" w-full lg:w-[740px] mx-auto pt-16">
+				<h1 class="text-5xl font-bold flex justify-between items-center gap-x-4 pb-4">
+					Hey, soy Marcos <a class="flex items-center" href="https://www.linkedin.com/in/marcos-guerrero45" target="_blank"><Badge>Disponible para trabajar</Badge></a>
+				</h1>
+				<h2 class="text-2xl text-wrap opacity-80">
+					tata años de experiencia. Como desarrollador Web. De Mendoza Argentina "bandera argentina". Especializado en crear aplicaciones únicas.
+				</h2>
+	
+				<nav class="flex gap-x-4 mt-5 mb-16">
+					<SocialPill href="https://www.linkedin.com/in/marcos-guerrero45">
+						<LinkedIn class="w-6 h-6"/> 
+						LinkedIn
+					</SocialPill>
+					<SocialPill href="https://github.com/Picuruz45">
+						<GitHubIcon class="w-6 h-6"/> 
+						GitHub
+					</SocialPill>
+					<SocialPill href="mailto:marcos.45874@gmail.com">
+						<EmailIcon class="w-6 h-6"/> 
+						marcos.45874@gmail.com
+					</SocialPill>
+				</nav>
+		</section>
+
+		<section id="experiencia" class="w-[900px]">
+			<h2 class="text-2xl font-semibold mb-6 flex gap-x-2 items-center">
+				<Work class="size-7" />
+				Experiencia Laboral
+			</h2>
+			<Experience />
+		</section>
+
+		<section id="proyectos" class="flex flex-col pb-60 w-[900px]">
+			<h2 class="text-2xl font-semibold mb-6 flex gap-x-2 items-center">Proyectos</h2>
+			<NavProyectos />
+		</section>
+	</main>
+</Layout>

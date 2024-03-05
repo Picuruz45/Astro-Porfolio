@@ -1,0 +1,39 @@
+---
+import type { GetStaticPaths } from "astro";
+import Layout from "../../layouts/Layout.astro"
+import { ObtenerPagina, ObtenerPaginas } from "../../../public/JavaScript/fetch.js"
+import obtenerRepositorios from "../../../public/JavaScript/conectarGitHub.js"
+
+const { id } = Astro.params;
+
+const paginaObtenida = await ObtenerPagina(id);
+
+export const getStaticPaths = ( async () => {
+    const paginas = await ObtenerPaginas(); 
+
+    return paginas.map( element => ({
+        params: { id: element.site_id}
+    }));
+}) satisfies GetStaticPaths;
+
+---
+
+<!-- const repos = await obtenerRepositorios();
+
+const repo = repos.find( element => element.name == paginaObtenida.name );
+
+const { name, description, language, topics } = repo; -->
+
+<Layout title="Porfolio de Marcos Guerrero - Desarrollador y Programador Web">
+    <main class="w-full flex justify-center mt-24 px-44">
+        <div class="flex gap-x-5">
+            <img class="w-[700px]" src={paginaObtenida.screenshot_url}>
+            <div class="flex flex-col gap-y-3 mt-5">
+                <h1 class=" text-5xl font-semibold">{paginaObtenida.name}</h1>
+                <p class="text-xl text-gray-400">DESCRIPCION</p>
+                <p class="text-orange-600 font-bold text-xl">LENGUAJE</p>
+                <p>TOPICS</p>
+            </div>
+        </div>
+    </main>
+</Layout>

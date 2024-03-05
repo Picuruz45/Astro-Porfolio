@@ -1,0 +1,97 @@
+
+---
+    import TargetProyecto from "../components/TargetProyecto.astro";
+    import { ObtenerPaginas, ObtenerPagina } from "../../public/JavaScript/fetch.js"
+
+    const paginas = await ObtenerPaginas();
+
+    let JavaScript = [];
+    let CSharp = [];
+
+    paginas.map( web => {
+        if(web.name.includes("node")){
+            JavaScript.push(web)
+        }
+        else if(web.name.includes("csharp")){
+            CSharp.push(web)
+        }
+    })
+---
+
+
+<script src="../../public/JavaScript/navProyectos.ts"></script>
+
+<style>
+    .spinner {
+        border: 4px solid rgba(0, 0, 0, 0.1);
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border-left-color: #09f;
+
+        animation: spin 1s ease infinite;
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+
+<div class="mb-4 border-b border-gray-200 dark:border-gray-700">
+    <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400" id="tabs-example" role="tablist">
+        <li class="me-2" role="presentation">
+            <button
+                class="inline-block rounded-t-lg border-b-2 border-transparent p-4 hover:border-gray-300 hover:text-gray-600 dark:hover:text-gray-300"
+                id="javaScrip-tab"
+                type="button"
+                role="tab"
+                aria-controls="javaScript-targetEl"
+                aria-selected="false"
+            >
+                JavaScript
+            </button>
+        </li>
+        <li class="me-2" role="presentation">
+            <button
+                class="inline-block rounded-t-lg border-b-2 border-transparent p-4 hover:border-gray-300 hover:text-gray-600 dark:hover:text-gray-300"
+                id="cSharp-tab"
+                type="button"
+                role="tab"
+                aria-controls="cSharp-targetEl"
+                aria-selected="false"
+            >
+                C#
+            </button>
+        </li>
+    </ul>
+</div>
+
+<div class="spinner"></div>
+
+<div class="hidden" id="tabContentExample">
+    <div
+        id="javaScript-targetEl"
+        role="tabpanel"
+        aria-labelledby="javaScrip-tab"
+    >
+    
+    <TargetProyecto object={JavaScript} />
+    
+    </div>
+    <div
+        id="cSharp-targetEl"
+        role="tabpanel"
+        aria-labelledby="cSharp-tab"
+    >
+
+    <TargetProyecto object={CSharp} />
+
+    </div>
+</div>
+
